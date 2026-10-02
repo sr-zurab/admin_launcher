@@ -1,0 +1,23 @@
+# Прямые зависимости приложения
+PyQt6==6.11.0
+qt-material==2.17
+pdfplumber==0.11.9
+requests==2.34.2
+urllib3==2.7.0
+openpyxl==3.1.5
+cryptography==48.0.0
+
+# Транзитивные зависимости (зафиксированы из рабочего venv)
+PyQt6-Qt6==6.11.1
+PyQt6_sip==13.11.1
+certifi==2026.5.20
+cffi==2.0.0
+charset-normalizer==3.4.7
+et_xmlfile==2.0.0
+idna==3.18
+Jinja2==3.1.6
+MarkupSafe==3.0.3
+pdfminer.six==20251230
+pillow==12.2.0
+pycparser==3.0
+pypdfium2==5.9.0

@@ -1,0 +1,7 @@
+venv/
+export/
+команда для админ прав.txt
+admin_launcher.desktop
+run.sh
+__pycache__/
+*.json
