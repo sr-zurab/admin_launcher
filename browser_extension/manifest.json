@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "AdminLauncher",
+  "short_name": "AdminLauncher",
+  "version": "1.0.0",
+  "description": "Лаунчер приложений: ГМУ, Бюджет — поиск через API с базой JSON",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://bus.gov.ru/*",
+    "https://budget.gov.ru/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "AdminLauncher",
+    "default_icon": {
+      "16": "data/icon16.svg",
+      "48": "data/icon48.svg"
+    }
+  },
+  "icons": {
+    "16": "data/icon16.svg",
+    "48": "data/icon48.svg"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["data/*.json", "data/*.svg", "apps/*.html", "apps/*.js", "shared/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

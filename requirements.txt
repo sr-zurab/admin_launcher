@@ -1,0 +1,7 @@
+PyQt6
+qt-material
+pdfplumber
+requests
+urllib3
+openpyxl
+cryptography

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdminLauncher — Информация об учреждении (bus.gov.ru)</title>
+  <link rel="stylesheet" href="../shared/style.css">
+</head>
+<body>
+  <div class="app-header">
+    <h1>🏛 Информация об учреждении (bus.gov.ru)</h1>
+    <div class="app-subtitle">ГМУ — поиск организации по ИНН/КПП, реквизиты, локальная база JSON</div>
+  </div>
+
+  <!-- Ввод ИНН / КПП (как в десктопе) -->
+  <div class="toolbar-row inn-row">
+    <label>ИНН:</label>
+    <input type="text" id="inn" placeholder="ИНН (10 или 12 цифр)">
+    <label>КПП:</label>
+    <input type="text" id="kpp" placeholder="КПП (9 цифр)">
+    <button id="btn-search" class="btn-primary">Найти по ИНН/КПП</button>
+  </div>
+
+  <!-- Результат / реквизиты (как QTextEdit в десктопе) -->
+  <div class="result-box">
+    <label style="display:block;margin-bottom:6px;font-weight:600;">Реквизиты:</label>
+    <div id="result" class="result-area"></div>
+  </div>
+
+  <!-- Ключ хранения -->
+  <div class="toolbar-row key-row">
+    <label>Ключ:</label>
+    <input type="text" id="key" placeholder="Ключ хранения (название организации)">
+  </div>
+
+  <!-- Кнопки операций строка 1 -->
+  <div class="toolbar-row btn-row">
+    <button id="btn-save" class="btn-primary">Сохранить</button>
+    <button id="btn-load">Загрузить</button>
+    <button id="btn-update" class="btn-ghost">Обновить из API по ключу</button>
+    <button id="btn-table">Показать таблицу организаций</button>
+  </div>
+
+  <!-- Кнопки операций строка 2 -->
+  <div class="toolbar-row btn-row2">
+    <button id="btn-delete" class="btn-danger">Удалить организацию</button>
+    <button id="btn-export">Экспорт в Excel</button>
+    <button id="btn-reimport" class="btn-ghost">Переимпорт из JSON</button>
+    <button id="btn-export-json" class="btn-ghost">Экспорт в JSON</button>
+  </div>
+
+  <div class="hint" id="hint"></div>
+
+  <div class="app-footer" id="footer-status">Готов</div>
+
+  <script src="../shared/api.js"></script>
+  <script src="gmu.js"></script>
+</body>
+</html>

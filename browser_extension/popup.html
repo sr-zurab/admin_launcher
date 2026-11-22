@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdminLauncher — Лаунчер</title>
+  <link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+  <div class="launcher">
+    <header>
+      <h1>Панель запуска приложений</h1>
+      <p class="subtitle">Выберите приложение для запуска. Все окна работают независимо.</p>
+    </header>
+
+    <div class="apps-grid">
+      <button class="app-btn" data-app="gmu">
+        <span class="btn-icon">🏛</span>
+        <span class="btn-text">Инфо по организациям bus.gov.ru</span>
+      </button>
+
+      <button class="app-btn" data-app="budget">
+        <span class="btn-icon">💰</span>
+        <span class="btn-text">Реестр УБП/НУБП из ЭБ</span>
+      </button>
+    </div>
+
+    <div class="footer">
+      <p>Каждое приложение открывается в отдельной вкладке браузера</p>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

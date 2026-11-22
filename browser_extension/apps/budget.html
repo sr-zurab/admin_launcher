@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdminLauncher — Реестр УБП/НУБП (budget.gov.ru)</title>
+  <link rel="stylesheet" href="../shared/style.css">
+</head>
+<body>
+  <div class="app-header">
+    <h1>💰 Реестр УБП/НУБП — budget.gov.ru</h1>
+    <div class="app-subtitle">Поиск организации по ИНН/наименованию через API, реквизиты по группам, локальная база JSON</div>
+  </div>
+
+  <div class="toolbar-row top-row">
+    <input type="text" id="input-q" placeholder="ИНН или наименование" style="flex:1;">
+    <button id="btn-inn">По ИНН</button>
+    <button id="btn-name">По наименованию</button>
+    <button id="btn-save-found" class="btn-primary">Сохранить</button>
+    <button id="btn-show-raw">Raw</button>
+    <button id="btn-add-manual">Добавить</button>
+  </div>
+
+  <div class="toolbar-row key-row">
+    <input type="text" id="key-input" placeholder="Введите ключ сохранённой организации" style="flex:1;">
+    <button id="btn-load-by-key">Загрузить по ключу</button>
+  </div>
+
+  <hr class="sep">
+
+  <div class="splitter">
+    <div class="left-panel">
+      <div style="font-weight:600;margin-bottom:6px;">Сохранённые записи</div>
+      <input type="text" id="list-search" placeholder="Поиск по ключам..." style="width:100%;margin-bottom:6px;padding:4px 8px;font-size:12px;border:1px solid #d1d5db;border-radius:4px;">
+      <ul id="list-widget" class="result-list"></ul>
+      <div class="left-btns">
+        <button id="btn-open">Показать</button>
+        <button id="btn-delete" class="btn-danger">Удалить</button>
+        <button id="btn-export">Экспорт CSV</button>
+        <button id="btn-refresh-record">Обновить</button>
+        <button id="btn-reimport" class="btn-ghost">Переимпорт из JSON</button>
+        <button id="btn-export-json" class="btn-ghost">Экспорт в JSON</button>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div style="font-weight:600;margin-bottom:6px;">Реквизиты (вкладки по группам)</div>
+      <div id="tab-area" class="tab-area">
+        <div id="tab-container" class="tab-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hint" id="hint"></div>
+  <div class="app-footer" id="footer-status">Готов</div>
+
+  <script src="../shared/api.js"></script>
+  <script src="budget.js"></script>
+</body>
+</html>

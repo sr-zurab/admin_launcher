@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Инструменты администратора
+Comment=Комплекс приложений для работы с ГИС и сертификатами
+Exec="/home/zurab/My projects/admin_launcher/run.sh"
+Icon=/home/zurab/My projects/admin_launcher/Icon.png
+Path=/home/zurab/My projects/admin_launcher/
+Terminal=false
+StartupWMClass=launcher_ddo.pyw
+Categories=Utility;Application;
