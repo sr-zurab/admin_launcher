@@ -78,34 +78,9 @@ async function searchGmu(inn, kpp) {
   const initiator = org.initiator || {};
   const main = org.main || {};
   const other = org.other || {};
-  const additional = org.additional || {};
   const addr = (main.complexAddress && main.complexAddress.address) || {};
   const chief = (other.chief && other.chief[0]) || {};
   const founder = (other.founder && other.founder[0]) || {};
-
-  // Поиск банковских счетов 20 и 80 в ответе API (рекурсивный поиск по всему объекту)
-  function findBankAccounts(obj, suffix) {
-    let result = '';
-    if (!obj || typeof obj !== 'object') return result;
-    for (const [k, v] of Object.entries(obj)) {
-      const lk = k.toLowerCase();
-      const isAccountKey = lk.includes('schet') || lk.includes('счет') || lk.includes('account') ||
-        lk.includes('rs') || lk.includes('рс') || lk.includes('ks') || lk.includes('кс') ||
-        lk.includes('bank') || lk.includes('банк');
-      const hasSuffix = lk.includes(suffix) || (suffix === '20' && lk.endsWith('20')) ||
-        (suffix === '80' && lk.endsWith('80'));
-      if (isAccountKey && hasSuffix && v != null && v !== '' && typeof v !== 'object') {
-        const s = String(v).trim();
-        if (s && !result) result = s;
-      } else if (typeof v === 'object' && v !== null) {
-        const deep = findBankAccounts(v, suffix);
-        if (deep && !result) result = deep;
-      }
-    }
-    return result;
-  }
-  const bankAccount20 = findBankAccounts(org, '20') || '';
-  const bankAccount80 = findBankAccounts(org, '80') || '';
 
   return {
     source: 'gmu',
@@ -124,9 +99,7 @@ async function searchGmu(inn, kpp) {
     initiator: initiator,
     main: main,
     other: other,
-    raw: org,
-    bankAccount20: bankAccount20,
-    bankAccount80: bankAccount80
+    raw: org
   };
 }
 

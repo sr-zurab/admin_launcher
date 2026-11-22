@@ -12,12 +12,20 @@ let currentKey = null;    // ключ текущей записи в базе
 const FIXED_BIC = '019690001';
 const FIXED_RS = '03234643967010009400';
 
-// ===== Л/С по правилу десктопа =====
+// ===== Л/С (счёт 20) по правилу десктопа =====
 function buildLs(regNum) {
   if (!regNum) return '';
   const s = String(regNum);
   if (s.length <= 3) return '';
   return '20946' + s.substring(3) + '0';
+}
+
+// ===== Счёт 80 по правилу десктопа =====
+function buildLs80(regNum) {
+  if (!regNum) return '';
+  const s = String(regNum);
+  if (s.length <= 3) return '';
+  return '803' + s.substring(3) + '000';
 }
 
 // ===== ЭЛЕМЕНТЫ =====
@@ -96,12 +104,12 @@ function displayRequisites(data) {
   html += kv('Учредитель', data.founder);
 
   const ls = buildLs(data.regNum);
+  const ls80 = buildLs80(data.regNum);
   html += '<div style="margin-top:10px;font-weight:600;">💳 Банковские реквизиты:</div>';
-  html += kv('Л/С', ls);
+  html += kv('Л/С (счёт 20)', ls);
   html += kv('БИК', FIXED_BIC);
   html += kv('Р/С', FIXED_RS);
-  if (data.bankAccount20) html += kv('Банковский счёт 20', data.bankAccount20);
-  if (data.bankAccount80) html += kv('Банковский счёт 80', data.bankAccount80);
+  if (ls80) html += kv('Счёт 80', ls80);
 
   if (cls && Object.keys(cls).length) {
     html += '<div style="margin-top:12px;font-weight:600;">Классификаторы:</div>';
@@ -310,14 +318,15 @@ function doExport() {
     const rows = keys.map(k => {
       const it = all[k];
       const ls = buildLs(it.regNum);
+      const ls80 = buildLs80(it.regNum);
       return [
         k, it.fullName, it.shortName, it.inn, it.kpp, it.ogrn,
         it.regNum, it.orgType, it.address, ls, FIXED_BIC, FIXED_RS,
-        it.bankAccount20 || '', it.bankAccount80 || '',
+        ls80,
         it.chief, it.founder
       ];
     });
-    const csv = ['Ключ,Полное наименование,Краткое наименование,ИНН,КПП,ОГРН,Реестровый номер,Тип организации,Адрес,Л/С,БИК,Р/С,Счёт 20,Счёт 80,Руководитель,Учредитель',
+    const csv = ['Ключ,Полное наименование,Краткое наименование,ИНН,КПП,ОГРН,Реестровый номер,Тип организации,Адрес,Л/С (счёт 20),БИК,Р/С,Счёт 80,Руководитель,Учредитель',
       ...rows.map(r => r.map(v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"').join(','))].join('\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
@@ -341,7 +350,7 @@ function doExportJson() {
       const it = all[k];
       out[k] = {
         initiator: it.initiator || { fullName: it.fullName || '', inn: it.inn || '', kpp: it.kpp || '', regNum: it.regNum || '' },
-        main: it.main || { shortName: it.shortName || '', ogrn: it.ogrn || '', orgType: it.orgType || '', address: it.address || '', bankAccount20: it.bankAccount20 || '', bankAccount80: it.bankAccount80 || '' },
+        main: it.main || { shortName: it.shortName || '', ogrn: it.ogrn || '', orgType: it.orgType || '', address: it.address || '' },
         other: it.other || { chief: it.chief ? [{ lastName: it.chief, firstName: '', middleName: '', position: '' }] : [], founder: it.founder ? [{ fullName: it.founder }] : [] }
       };
     });
