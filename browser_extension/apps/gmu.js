@@ -9,8 +9,8 @@ const SITE_URL = 'https://bus.gov.ru/';
 let currentData = null;   // последний результат поиска (как current_data в десктопе)
 let currentKey = null;    // ключ текущей записи в базе
 
-const FIXED_BIC = '019690001';
-const FIXED_RS = '03234643967010009400';
+const FIXED_BIC = '012202102';
+const FIXED_RS = '03234643967010003200';
 
 // ===== Л/С (счёт 20) по правилу десктопа =====
 function buildLs(regNum) {
